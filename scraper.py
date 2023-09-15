@@ -49,7 +49,7 @@ def loadMain():
         print('Nenhum arquivo encontrado.')
         return None
     
-def rightFile():
+def writeFile():
     current_datetime = datetime.datetime.now()
     formatted_datetime = current_datetime.strftime("%Y-%m-%d_%H-%M-%S")
     file_name = f"datalog/log_{formatted_datetime}.html"
@@ -82,7 +82,7 @@ while keepRunning:
             if main == None:
                 print("Main initialized from response")
                 main = main_string
-                rightFile()
+                writeFile()
             distancia = Levenshtein.distance(main, main_string)
             current_datetime = datetime.datetime.now()
             formatted_datetime = current_datetime.strftime("%Y-%m-%dT%H-%M-%SZ")
@@ -90,7 +90,7 @@ while keepRunning:
                 print(f"{formatted_datetime} - Html main page content change detected.")
                 sendEmail(subject, body, sender, recipients, password)
                 main = main_string
-                rightFile()
+                writeFile()
             else:
                 print(f"{formatted_datetime} - Nothing new under the sun")
             time.sleep(interval)
